@@ -1,0 +1,24 @@
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Xcode / build artifacts
+DerivedData/
+.xcode-derived/
+*.xcresult
+*.xcodebuild.log
+*.log
+*.xcworkspace/contents.xcworkspacedata
+
+# Xcode user-specific files
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/
+
+# Local environment/secrets
+.env
+.env.*
+TODOS.md
