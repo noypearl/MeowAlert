@@ -1,4 +1,5 @@
 .DS_Store
+.git
 
 # Swift Package Manager
 .build/

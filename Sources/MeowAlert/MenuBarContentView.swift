@@ -117,6 +117,10 @@ struct MenuBarContentView: View {
                 .pickerStyle(.menu)
                 .labelsHidden()
                 .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(Color.white.opacity(0.14))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .environment(\.layoutDirection, .rightToLeft)
                 .disabled(!settings.soundEnabled || availableSounds.isEmpty)
 
