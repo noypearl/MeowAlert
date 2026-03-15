@@ -1,5 +1,5 @@
 ## 🚨 MeowAlert (macOS)
-Because the official siren gives us enough gray hair as it is.
+#### Mac App that turns disturbing Red Alerts into funny Meme sounds
 MeowAlert is a native macOS menu bar app that keeps an eye on the Home Front Command (Oref) feed so you don't have to. It lives in your menu bar, watches your specific cities, and lets you know when it's time to head to the mamad—without the immediate soul-crushing panic of the standard siren.
 
 ### 🛡️ Why use this?
