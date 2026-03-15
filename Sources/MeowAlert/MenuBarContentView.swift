@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct MenuBarContentView: View {
     @ObservedObject var monitor: AlertMonitor
@@ -11,6 +12,7 @@ struct MenuBarContentView: View {
     @State private var isHowItWorksPresented = false
     @State private var isUsagePresented = false
     @State private var isDevelopmentMode = false
+    @State private var soundImportMessage: String?
 
     private var availableSounds: [AlertSoundOption] {
         AlertSoundCatalog.availableSounds()
@@ -118,7 +120,19 @@ struct MenuBarContentView: View {
                 .environment(\.layoutDirection, .rightToLeft)
                 .disabled(!settings.soundEnabled || availableSounds.isEmpty)
 
-                if availableSounds.isEmpty {
+                HStack {
+                    Button("העלאת MP3") {
+                        openMP3Panel()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Spacer(minLength: 0)
+                }
+
+                if let soundImportMessage, !soundImportMessage.isEmpty {
+                    Text(soundImportMessage)
+                        .font(.caption2)
+                        .foregroundStyle(Color.white.opacity(0.72))
+                } else if availableSounds.isEmpty {
                     Text("אין צלילים זמינים באפליקציה.")
                         .font(.caption2)
                         .foregroundStyle(Color.white.opacity(0.6))
@@ -127,7 +141,7 @@ struct MenuBarContentView: View {
                         .font(.caption2)
                         .foregroundStyle(Color.white.opacity(0.6))
                 } else {
-                    Text("משמש להתראות ולהשמעת גיבוי.")
+                    Text("הצליל יושמע בעת התראה")
                         .font(.caption2)
                         .foregroundStyle(Color.white.opacity(0.6))
                 }
@@ -361,6 +375,28 @@ struct MenuBarContentView: View {
     private func sendTestAlert() {
         Task {
             await monitor.sendTestNotification()
+        }
+    }
+
+    private func openMP3Panel() {
+        NSApp.activate(ignoringOtherApps: true)
+
+        let panel = NSOpenPanel()
+        panel.title = "בחרו קובץ MP3"
+        panel.message = "הקובץ יישמר כאפשרות צליל התראה."
+        panel.prompt = "בחירה"
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.canChooseFiles = true
+        panel.allowedContentTypes = [.mp3]
+
+        guard panel.runModal() == .OK, let sourceURL = panel.url else { return }
+        do {
+            let importedOption = try AlertSoundCatalog.importCustomMP3(from: sourceURL)
+            settings.selectedAlertSoundFileName = importedOption.fileName
+            soundImportMessage = "צליל חדש נוסף ונבחר."
+        } catch {
+            soundImportMessage = error.localizedDescription
         }
     }
 

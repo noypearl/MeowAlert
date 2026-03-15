@@ -2,17 +2,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "PikudAlert",
+    name: "MeowAlert",
     platforms: [
         .macOS(.v13)
     ],
     products: [
-        .executable(name: "PikudAlert", targets: ["PikudAlert"])
+        .executable(name: "MeowAlert", targets: ["MeowAlert"])
     ],
     targets: [
         .executableTarget(
-            name: "PikudAlert",
-            path: "Sources/PikudAlert",
+            name: "MeowAlert",
+            path: "Sources/MeowAlert",
             resources: [
                 .process("Resources")
             ]

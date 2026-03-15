@@ -115,7 +115,7 @@ final class AlertMonitor: ObservableObject {
     }
 
     func sendTestNotification() async {
-        let testCity = settings.watchedCities.randomElement() ?? "רמת גן"
+        let testCity = settings.watchedCities.randomElement() ?? "תל אביב - מזרח"
         let alert = AlertResponse(
             id: "test-\(UUID().uuidString)",
             cat: "1",

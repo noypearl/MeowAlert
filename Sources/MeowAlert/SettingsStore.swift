@@ -51,7 +51,7 @@ final class SettingsStore: ObservableObject {
         } else if let legacyText = defaults.string(forKey: Self.legacyWatchedCitiesTextKey), !legacyText.isEmpty {
             self.watchedCities = Self.parseCities(from: legacyText)
         } else {
-            self.watchedCities = ["רמת גן"]
+            self.watchedCities = ["תל אביב - מזרח"]
         }
         self.soundEnabled = defaults.object(forKey: Self.soundEnabledKey) as? Bool ?? true
         let storedSoundFileName = defaults.string(forKey: Self.selectedAlertSoundKey)
