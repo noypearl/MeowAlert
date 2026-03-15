@@ -1,49 +1,71 @@
-# Pikud Alert
+🚨 MeowAlert (macOS)
+Because the official siren gives us enough gray hair as it is.
+MeowAlert is a native macOS menu bar app that keeps an eye on the Home Front Command (Oref) feed so you don't have to. It lives in your menu bar, watches your specific cities, and lets you know when it's time to head to the mamad—without the immediate soul-crushing panic of the standard siren.
 
-Native macOS menu bar app that polls the Oref alert API every 4 seconds and raises a local macOS notification when one of your watched cities appears in the `data` array.
+🛡️ Why use this?
+Meme-Grade Safety: Replace the heart-stopping "Siren" with a genZ meme sound or just your favorite 1-second meme MP3.
 
-## What is included
+Menu Bar Stealth: It’s tiny, out of the way, and doesn’t hog your screen.
 
-- SwiftUI menu bar app for macOS 13+
-- Oref API polling client
-- Matching against watched cities
-- Duplicate alert suppression by alert `id`
-- Local notifications and optional sound
-- Main panel city manager with autocomplete and polling interval
+Fast as Lightning: Polls the official Pikud Haoref API every few seconds. If Pikud Haoref knows, you know.
 
-## Project structure
+Hyper-Local: Only get alerted for the cities you actually care about.
 
-- `Package.swift` defines a Swift package executable target that can be opened directly in Xcode.
-- `Sources/PikudAlert/` contains the app, monitor, API client, notification manager, and main panel UI.
+📖 How-To Guide
+Option 1: The "I Just Want to Stay Safe" Way (Easy)
+If you aren't a coder and just want the app to run:
 
-## Run locally
+Download: Go to the Releases page and download MeowAlert.app.zip.
 
-1. Open the package in Xcode:
-   - `open Package.swift`
-2. Run the `PikudAlert` scheme.
-3. Grant notification permission when macOS prompts you.
-4. Add your watched cities in the main menu panel.
-   - Open `Manage` in the `Watched Areas` card, then use search and suggestions.
+Unzip: Double-click the file to reveal the MeowAlert.app.
 
-If `xcodebuild` still points to Command Line Tools, switch it once:
+Install: Drag the app into your Applications folder.
 
-`sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+First Launch: * Since it's from a cool indie dev (you), macOS might be picky.
 
-## Run as real .app target (recommended for system notifications)
+Right-click the app and select Open.
 
-1. Generate the Xcode app project:
-   - `xcodegen generate`
-2. Open the generated project:
-   - `open PikudAlertApp.xcodeproj`
-3. Select scheme `PikudAlertApp` and run on `My Mac`.
+Click Open again on the pop-up.
 
-This mode runs as a real macOS app bundle, so `UNUserNotificationCenter` banners work correctly.
+Configure: Click the icon in your menu bar, add your city, and upload your funniest MP3.
 
-## Notes
+Option 2: The "I’m a Hacker" Way (Building from Source)
+For the senior researchers and devs who want to see under the hood:
 
-- The app starts monitoring immediately.
-- Polling defaults to 4 seconds and can be increased in the main menu panel.
-- City matching is tolerant to minor naming differences (exact or partial normalized match).
-- Use `Send Test Notification` from the menu bar window to verify notification delivery and sound settings manually.
-- The endpoint behavior can change. If the API needs extra headers or anti-bot handling later, adjust `OrefAPIClient.swift`.
-- For a production-quality distributable `.app`, the next step is creating an Xcode app target with an `Info.plist`, app icon, signing, and launch-at-login support.
+Prerequisites:
+
+macOS 13+
+
+Xcode 15+
+
+XcodeGen (If you don't have it: brew install xcodegen)
+
+The Build Process:
+
+Clone the repo:
+
+Bash
+git clone https://github.com/noypearl/MeowAlert.git
+cd MeowAlert
+Generate the project:
+We use XcodeGen to keep the repo clean of messy .xcodeproj files. Run:
+
+Bash
+xcodegen generate
+Build & Run:
+
+Open the newly created MeowAlert.xcodeproj.
+
+Select the MeowAlert scheme.
+
+Hit Cmd + R to run it on your Mac.
+
+[!TIP]
+Why build from source? You can verify that we aren't sending your data anywhere and that the "Polling" interval is truly as aggressive as you want it to be.
+
+🎮 Usage Tips
+Watched Areas: Use the autocomplete! It's better than guessing how the API spells "Rishon LeTsiyon."
+
+Sound Check: Use the Test Alert button in Dev Mode to make sure your custom MP3 isn't too loud (or too quiet).
+
+Stay Monitoring: The app starts monitoring automatically on launch. If the icon is grayed out, check your connection.
