@@ -15,6 +15,7 @@ final class NotificationManager {
     }
 
     private let audioInterruptionManager = AudioInterruptionManager()
+    private(set) var lastUnavailableMessage: String?
 
     private func playBundledSoundFallback(named soundFileName: String) {
         let playbackDuration: TimeInterval
@@ -42,7 +43,9 @@ final class NotificationManager {
 
     private func ensureAuthorization() async -> AuthorizationState {
         guard isBundleBackedApp else {
-            return .unavailable("התראות אינן זמינות בהרצה מ-Swift Package. יש להריץ מיעד .app אמיתי ב-Xcode.")
+            let message = "התראות אינן זמינות בהרצה מ-Swift Package. יש להריץ מיעד .app אמיתי ב-Xcode."
+            lastUnavailableMessage = message
+            return .unavailable(message)
         }
 
         let center = UNUserNotificationCenter.current()
@@ -50,19 +53,32 @@ final class NotificationManager {
 
         switch settings.authorizationStatus {
         case .authorized, .provisional, .ephemeral:
+            lastUnavailableMessage = nil
             return .authorized
         case .denied:
-            return .unavailable("התראות מושבתות עבור פיקוד אלרט בהגדרות המערכת.")
+            let message = "התראות מושבתות עבור פיקוד אלרט בהגדרות המערכת."
+            lastUnavailableMessage = message
+            return .unavailable(message)
         case .notDetermined:
             do {
                 let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
-                return granted ? .authorized : .unavailable("לא ניתנה הרשאה להתראות.")
+                if granted {
+                    lastUnavailableMessage = nil
+                    return .authorized
+                }
+                let message = "לא ניתנה הרשאה להתראות."
+                lastUnavailableMessage = message
+                return .unavailable(message)
             } catch {
                 playBundledSoundFallback(named: AlertSoundCatalog.defaultSoundFileName())
-                return .unavailable("בקשת ההרשאה להתראות נכשלה: \(error.localizedDescription)")
+                let message = "בקשת ההרשאה להתראות נכשלה: \(error.localizedDescription)"
+                lastUnavailableMessage = message
+                return .unavailable(message)
             }
         @unknown default:
-            return .unavailable("סטטוס הרשאת ההתראות אינו זמין.")
+            let message = "סטטוס הרשאת ההתראות אינו זמין."
+            lastUnavailableMessage = message
+            return .unavailable(message)
         }
     }
 
@@ -95,6 +111,9 @@ final class NotificationManager {
         return await withCheckedContinuation { continuation in
             center.add(request) { error in
                 if let error {
+                    DispatchQueue.main.async {
+                        self.lastUnavailableMessage = "שליחת ההתראה נכשלה: \(error.localizedDescription)"
+                    }
                     if soundEnabled {
                         DispatchQueue.main.async {
                             self.playBundledSoundFallback(named: soundFileName)

@@ -136,7 +136,7 @@ final class AlertMonitor: ObservableObject {
             notificationWarning = nil
             lastActionMessage = "התראת בדיקה נשלחה בשעה \(Date.now.formatted(date: .omitted, time: .standard))."
         } else {
-            notificationWarning = "התראות מערכת אינן זמינות בהרצה מ-Swift Package. הופעל צליל גיבוי."
+            notificationWarning = notifications.lastUnavailableMessage ?? "התראות מערכת אינן זמינות כרגע. הופעל צליל גיבוי."
             lastActionMessage = "התראת בדיקה הופעלה (גיבוי) בשעה \(Date.now.formatted(date: .omitted, time: .standard))."
         }
     }
@@ -178,8 +178,10 @@ final class AlertMonitor: ObservableObject {
                     soundEnabled: settings.soundEnabled,
                     soundFileName: settings.selectedAlertSoundFileName
                 )
-                if !posted {
-                    notificationWarning = "התראות מערכת אינן זמינות בהרצה מ-Swift Package. הופעל צליל גיבוי."
+                if posted {
+                    notificationWarning = nil
+                } else {
+                    notificationWarning = notifications.lastUnavailableMessage ?? "התראות מערכת אינן זמינות כרגע. הופעל צליל גיבוי."
                 }
             }
         } catch {
