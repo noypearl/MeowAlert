@@ -1,8 +1,8 @@
-🚨 MeowAlert (macOS)
+## 🚨 MeowAlert (macOS)
 Because the official siren gives us enough gray hair as it is.
 MeowAlert is a native macOS menu bar app that keeps an eye on the Home Front Command (Oref) feed so you don't have to. It lives in your menu bar, watches your specific cities, and lets you know when it's time to head to the mamad—without the immediate soul-crushing panic of the standard siren.
 
-🛡️ Why use this?
+### 🛡️ Why use this?
 Meme-Grade Safety: Replace the heart-stopping "Siren" with a genZ meme sound or just your favorite 1-second meme MP3.
 
 Menu Bar Stealth: It’s tiny, out of the way, and doesn’t hog your screen.
@@ -11,7 +11,7 @@ Fast as Lightning: Polls the official Pikud Haoref API every few seconds. If Pik
 
 Hyper-Local: Only get alerted for the cities you actually care about.
 
-📖 How-To Guide
+### 📖 How-To Guide
 Option 1: The "I Just Want to Stay Safe" Way (Easy)
 If you aren't a coder and just want the app to run:
 
@@ -32,15 +32,15 @@ Configure: Click the icon in your menu bar, add your city, and upload your funni
 Option 2: The "I’m a Hacker" Way (Building from Source)
 For the senior researchers and devs who want to see under the hood:
 
-Prerequisites:
+### Prerequisites:
 
 macOS 13+
 
-Xcode 15+
+Xcode 15+ (optional - optional - only for building app)
 
-XcodeGen (If you don't have it: brew install xcodegen)
+XcodeGen (If you don't have it: brew install xcodegen) (optional - only for building app)
 
-The Build Process:
+### The Build Process:
 
 Clone the repo:
 
@@ -60,10 +60,10 @@ Select the MeowAlert scheme.
 
 Hit Cmd + R to run it on your Mac.
 
-[!TIP]
+### [!TIP]
 Why build from source? You can verify that we aren't sending your data anywhere and that the "Polling" interval is truly as aggressive as you want it to be.
 
-🎮 Usage Tips
+### 🎮 Usage Tips
 Watched Areas: Use the autocomplete! It's better than guessing how the API spells "Rishon LeTsiyon."
 
 Sound Check: Use the Test Alert button in Dev Mode to make sure your custom MP3 isn't too loud (or too quiet).
