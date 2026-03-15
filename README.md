@@ -48,6 +48,21 @@ open MeowAlert.xcodeproj
 
 In Xcode: select the `MeowAlert` scheme and press `Cmd + R`.
 
+### Build a Standalone `.app` (No Xcode Run Needed)
+
+If you want MeowAlert to run as a normal Mac app (persistent and independent of Xcode’s **Run** button), build a `Release` app bundle from Terminal:
+
+```bash
+xcodebuild -project MeowAlert.xcodeproj -scheme MeowAlert -configuration Release -derivedDataPath .xcode-derived build
+```
+
+After build completes, the app will be available at:
+```bash
+.xcode-derived/Build/Products/Release/MeowAlert.app
+``` 
+Move MeowAlert.app into your Applications folder and launch it like any regular macOS app.
+
+
 ### [!TIP]
 Why build from source? You can verify that we aren't sending your data anywhere and that the "Polling" interval is truly as aggressive as you want it to be.
 
