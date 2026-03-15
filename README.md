@@ -13,54 +13,25 @@ Fast as Lightning: Polls the official Pikud Haoref API every few seconds. If Pik
 
 Hyper-Local: Only get alerted for the cities you actually care about.
 
-### 📖 How-To Guide
-Option 1: The "I Just Want to Stay Safe" Way (Easy)
-If you aren't a coder and just want the app to run:
+### 📖 Quick Start
+1. Download `MeowAlert.app.zip` from Releases.
+2. Unzip it and move `MeowAlert.app` to `Applications`.
+3. First launch: right-click `MeowAlert.app` -> `Open` -> `Open`.
+4. Click the menu bar icon, add your city, and choose a sound.
 
-Download: Go to the Releases page and download MeowAlert.app.zip.
+Custom Sounds: You can upload your own `.mp3` file for alerts from the app menu. Need ideas? Browse meme sounds on [MyInstants](https://www.myinstants.com/en/search/), download an `.mp3`, then select it inside MeowAlert.
 
-Unzip: Double-click the file to reveal the MeowAlert.app.
+### 🛠️ Build From Source
+Prerequisites: `macOS 13+`, `Xcode 15+` (`XcodeGen` only if generating the project).
 
-Install: Drag the app into your Applications folder.
-
-First Launch: * Since it's from a cool indie dev (you), macOS might be picky.
-
-Right-click the app and select Open.
-
-Click Open again on the pop-up.
-
-Configure: Click the icon in your menu bar, add your city, and upload your funniest MP3.
-
-Option 2: The "I’m a Hacker" Way (Building from Source)
-For the senior researchers and devs who want to see under the hood:
-
-### Prerequisites:
-
-macOS 13+
-
-Xcode 15+ (optional - optional - only for building app)
-
-XcodeGen (If you don't have it: brew install xcodegen) (optional - only for building app)
-
-### The Build Process:
-
-Clone the repo:
-
-Bash
+```bash
 git clone https://github.com/noypearl/MeowAlert.git
 cd MeowAlert
-Generate the project:
-We use XcodeGen to keep the repo clean of messy .xcodeproj files. Run:
+xcodegen generate   # only needed if .xcodeproj is not present
+open MeowAlert.xcodeproj
+```
 
-Bash
-xcodegen generate
-Build & Run:
-
-Open the newly created MeowAlert.xcodeproj.
-
-Select the MeowAlert scheme.
-
-Hit Cmd + R to run it on your Mac.
+In Xcode: select the `MeowAlert` scheme and press `Cmd + R`.
 
 ### [!TIP]
 Why build from source? You can verify that we aren't sending your data anywhere and that the "Polling" interval is truly as aggressive as you want it to be.
