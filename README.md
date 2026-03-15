@@ -30,15 +30,25 @@ Hyper-Local: Only get alerted for the cities you actually care about.
 5. Click the menu bar icon, add your city, and choose a sound.
 6. Wait for the magic to happen. You can toggle Dev Tools to see & hear the custom notification sound
 
-### Custom Sounds: You can upload your own `.mp3` file for alerts from the app menu. Need ideas? Browse meme sounds on [MyInstants](https://www.myinstants.com/en/search/), download an `.mp3`, then select it inside MeowAlert.
 
-### How it works
-MeowAlert runs quietly in your macOS menu bar and checks [the official Pikud HaOref](https://www.oref.org.il/warningMessages/alert/alerts.json) (Oref) alert feed every few seconds. When a new alert appears, it matches the alert locations against the cities you selected; if there is a match, it immediately plays your chosen sound (.mp3) and shows a notification so you can react fast. Everything happens locally on your Mac, and monitoring starts automatically when the app launches.
+**If macOS blocks `MeowAlert.app`**
+On some Macs, Gatekeeper may block the first launch with the following message:
+<img src="https://i.ibb.co/Z1hYj7pD/Image-15-03-2026-at-23-31.jpg" alt="Image 15 03 2026 at 23 31" border="0">
+
+If that happens, open `System Settings` -> `Privacy & Security`, scroll to the security warning for MeowAlert, click `Open Anyway`, then confirm by clicking `Open`.
+<br><br>
+<img src="https://i.ibb.co/Kz86G5S5/Image-15-03-2026-at-23-32.jpg" alt="Image-15-03-2026-at-23-32" border="0">
+
+<br>
+If installation is still blocked on your machine, you can run MeowAlert by building it directly from source!
 
 
 ### 🛠️ Build From Source
-Prerequisites: `macOS 13+`, `Xcode 15+` (`XcodeGen` only if generating the project).
+Prerequisites: `macOS 13+`, `Xcode 15+` `XcodeGen`.
 
+Install [Xcode](https://developer.apple.com/xcode/)
+Install [xcodegen](https://github.com/yonaskolb/xcodegen)
+Run:
 ```bash
 git clone https://github.com/noypearl/MeowAlert.git
 cd MeowAlert
@@ -65,6 +75,14 @@ Move MeowAlert.app into your Applications folder and launch it like any regular 
 
 ### [!TIP]
 Why build from source? You can verify that we aren't sending your data anywhere and that the "Polling" interval is truly as aggressive as you want it to be.
+
+
+
+### Custom Sounds: You can upload your own `.mp3` file for alerts from the app menu. Need ideas? Browse meme sounds on [MyInstants](https://www.myinstants.com/en/search/), download an `.mp3`, then select it inside MeowAlert.
+
+### How it works
+MeowAlert runs quietly in your macOS menu bar and checks [the official Pikud HaOref](https://www.oref.org.il/warningMessages/alert/alerts.json) (Oref) alert feed every few seconds. When a new alert appears, it matches the alert locations against the cities you selected; if there is a match, it immediately plays your chosen sound (.mp3) and shows a notification so you can react fast. Everything happens locally on your Mac, and monitoring starts automatically when the app launches.
+
 
 ### 🎮 Usage Tips
 Watched Areas: Use the autocomplete! It's better than guessing how the API spells "Rishon LeTsiyon."
