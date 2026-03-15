@@ -119,8 +119,13 @@ struct MenuBarContentView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
-                .background(Color.white.opacity(0.14))
+                .background(Color.white.opacity(0.10))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .strokeBorder(Color.white.opacity(0.16), lineWidth: 1)
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .environment(\.colorScheme, .dark)
                 .environment(\.layoutDirection, .rightToLeft)
                 .disabled(!settings.soundEnabled || availableSounds.isEmpty)
 
