@@ -46,9 +46,9 @@ If installation is still blocked on your machine, you can run MeowAlert by build
 ### 🛠️ Build From Source
 Prerequisites: `macOS 13+`, `Xcode 15+` `XcodeGen`.
 
-Install [Xcode](https://developer.apple.com/xcode/)
-Install [xcodegen](https://github.com/yonaskolb/xcodegen)
-Run:
+- Install [Xcode](https://developer.apple.com/xcode/)
+- Install [xcodegen](https://github.com/yonaskolb/xcodegen)
+- Run:
 ```bash
 git clone https://github.com/noypearl/MeowAlert.git
 cd MeowAlert
@@ -57,6 +57,9 @@ open MeowAlert.xcodeproj
 ```
 
 In Xcode: select the `MeowAlert` scheme and press `Cmd + R`.
+Now the app runs in your computer and you can even change / debug it in Xcode.
+However, since we ran it from Xcode - if you reset the computer / exit Xcode the app will be terminated.
+Sooo - let's build a standalone Mac app that you can always start whevever you want without xcode!
 
 ### Build a Standalone `.app` (No Xcode Run Needed)
 
