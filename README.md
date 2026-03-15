@@ -26,10 +26,11 @@ Hyper-Local: Only get alerted for the cities you actually care about.
 2. Unzip it and move `MeowAlert.app` to `Applications`.
 3. First launch: right-click `MeowAlert.app` -> `Open` -> `Open`.
 4. Enable Notifications under Settings -> Notifications -> MeowAlert -> Allow Notifications
+<img src="https://i.ibb.co/ksTpg1zB/Screenshot-2026-03-15-at-4-39-46.png" alt="Screenshot-2026-03-15-at-4-39-46" border="0" height="350">
 5. Click the menu bar icon, add your city, and choose a sound.
 6. Wait for the magic to happen. You can toggle Dev Tools to see & hear the custom notification sound
 
-Custom Sounds: You can upload your own `.mp3` file for alerts from the app menu. Need ideas? Browse meme sounds on [MyInstants](https://www.myinstants.com/en/search/), download an `.mp3`, then select it inside MeowAlert.
+### Custom Sounds: You can upload your own `.mp3` file for alerts from the app menu. Need ideas? Browse meme sounds on [MyInstants](https://www.myinstants.com/en/search/), download an `.mp3`, then select it inside MeowAlert.
 
 ### How it works
 MeowAlert runs quietly in your macOS menu bar and checks [the official Pikud HaOref](https://www.oref.org.il/warningMessages/alert/alerts.json) (Oref) alert feed every few seconds. When a new alert appears, it matches the alert locations against the cities you selected; if there is a match, it immediately plays your chosen sound (.mp3) and shows a notification so you can react fast. Everything happens locally on your Mac, and monitoring starts automatically when the app launches.
