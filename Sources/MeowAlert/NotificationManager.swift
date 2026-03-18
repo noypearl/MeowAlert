@@ -16,6 +16,8 @@ final class NotificationManager {
 
     private let audioInterruptionManager = AudioInterruptionManager()
     private(set) var lastUnavailableMessage: String?
+    private let alertSoundCooldown: TimeInterval = 15
+    private var lastAlertSoundPlaybackAt: Date?
 
     private func playBundledSoundFallback(named soundFileName: String) {
         let playbackDuration: TimeInterval
@@ -30,6 +32,17 @@ final class NotificationManager {
         playbackDuration = sound.duration > 0 ? sound.duration : 3.0
         audioInterruptionManager.interruptForAlarmPlayback(duration: playbackDuration)
         sound.play()
+    }
+
+    private func playAlertSoundWithCooldown(named soundFileName: String) {
+        let now = Date()
+        if let lastPlaybackAt = lastAlertSoundPlaybackAt,
+           now.timeIntervalSince(lastPlaybackAt) < alertSoundCooldown {
+            return
+        }
+
+        lastAlertSoundPlaybackAt = now
+        playBundledSoundFallback(named: soundFileName)
     }
 
     func requestAuthorization() async -> String? {
@@ -88,7 +101,7 @@ final class NotificationManager {
             break
         case .unavailable:
             if soundEnabled {
-                playBundledSoundFallback(named: soundFileName)
+                playAlertSoundWithCooldown(named: soundFileName)
             }
             return false
         }
@@ -116,7 +129,7 @@ final class NotificationManager {
                     }
                     if soundEnabled {
                         DispatchQueue.main.async {
-                            self.playBundledSoundFallback(named: soundFileName)
+                            self.playAlertSoundWithCooldown(named: soundFileName)
                         }
                     }
                     print("Notification scheduling failed: \(error.localizedDescription)")
@@ -124,7 +137,7 @@ final class NotificationManager {
                 } else {
                     if soundEnabled {
                         DispatchQueue.main.async {
-                            self.playBundledSoundFallback(named: soundFileName)
+                            self.playAlertSoundWithCooldown(named: soundFileName)
                         }
                     }
                     continuation.resume(returning: true)
